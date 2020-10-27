@@ -1,11 +1,9 @@
 module allometry
     use ISO_FORTRAN_ENV, only: REAL32, REAL64, REAL128
+    use constants
+    use allocation_test 
 
     implicit none
-
-    real(REAL64) :: delta_leaf
-    real(REAL64) :: delta_root
-    real(REAL64) :: delta_sapwood
 
     contains
 
@@ -15,11 +13,14 @@ module allometry
         implicit none
 
         real(REAL64) :: diam
+        real(REAL64) :: delta_leaf
+        real(REAL64) :: delta_root
+        real(REAL64) :: delta_sapwood
         call sapwood_carbon(delta_leaf, delta_root, delta_sapwood)
         
         diam = ((4 + (delta_sapwood)) / ((dw) * pi * 40)) **&
         &(1 / (2 + 0.5))
-
+        
     end function diameter
 
     function leaf_area_index() result(LAI)

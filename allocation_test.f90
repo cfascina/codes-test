@@ -3,10 +3,10 @@ module allocation_test
     use constants
     implicit none
 
-    real(REAL64) :: H = 0.0
-    real(REAL64) :: L = 0.0
-    real(REAL64) :: R = 0.0
-    real(REAL64) :: S = 0.0
+    real(REAL64) :: H = 108.91909828977032
+    real(REAL64) :: L = 1.2279169651518438
+    real(REAL64) :: R = 29.790591253578555
+    real(REAL64) :: S = 0.88026193814051623
 
     ! real(REAL64) :: H = 108.91909828977032 !HEARTWOOD - SOMENTE PARA TESTES (Valores: Cod. Philipe)
     ! real(REAL64) :: L = 1.2279169651518438 !LEAF BIOMASS - SOMENTE PARA TESTES (Valores: Cod. Philipe)
@@ -67,6 +67,7 @@ module allocation_test
         
         return
     end subroutine sapwood_carbon
+
 
 	!==============================!
 	!= Functions
@@ -138,6 +139,22 @@ module allocation_test
          real(REAL64) :: SS
         
          SS = S + bminc - L / ltor + R
-     end function sapwood
+    end function sapwood
+
+    function total_carbon_sap (delta_sapwood, H, S) result (cstem)
+        implicit none 
+        real(REAL64) :: delta_sapwood
+        real(REAL64) :: H
+        real(REAL64) :: S
+        real(REAL64) :: new_stem
+        real(REAL64) :: new_sw
+        real(REAL64) :: cstem
+
+        new_stem = delta_sapwood
+        new_sw = H + S
+
+        cstem = new_sw + new_stem
+
+    end function total_carbon_sap
 
 end module allocation_test
